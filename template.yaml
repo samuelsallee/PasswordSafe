@@ -48,7 +48,7 @@ Resources:
     Type: AWS::Serverless::Function 
     Properties:
       FunctionName: !Join ['-',[ "test-function1",!Ref BRANCH ]]
-      Handler: app.testHandler
+      Handler: app.get
       Policies:
         - S3CrudPolicy:
             BucketName: !Ref ExampleS3

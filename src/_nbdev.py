@@ -2,9 +2,11 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"helloworld": "helloWorld.ipynb"}
+index = {"get": "get.ipynb",
+         "helloworld": "helloWorld.ipynb"}
 
-modules = ["helloworld.py"]
+modules = ["get.py",
+           "helloworld.py"]
 
 doc_url = "https://thanakijwanavit.github.io/src/"
 
