@@ -46,5 +46,5 @@ class SimpleTable(Model):
 # input is querying an object id {id: OBJECT_ID}
 def get(event, *args):
   id_ = Event.parseQuery(deepcopy(event))['id']
-  r  = [item.toDict() for item in testObject.query('testObject')]
+  r  = [item.toDict() for item in SimpleTable.query('testObject')]
   return Response.returnSuccess(body = {'objects': r})
