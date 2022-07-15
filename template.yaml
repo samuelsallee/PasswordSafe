@@ -15,6 +15,7 @@ Globals:
         PASSWORD: '1234'
         BUCKETNAME: !Join ['-', ['testbucket1', 'check', !Ref BRANCH]]
         TABLENAME: !Join ['-', ['testtable1', 'check', !Ref BRANCH]]
+        SIMPLETABLENAME: !Join ['-', ['testsimpletable1', 'check', !Ref BRANCH]]
       
       
 Parameters: 
@@ -96,7 +97,14 @@ Resources:
       PointInTimeRecoverySpecification:
         PointInTimeRecoveryEnabled: true
       TableName: !Join ['-', ['testtable1', 'check', !Ref BRANCH]]
-      
+  #### simpleTable #####
+  ExampleSimpleTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey: 
+        Name: id
+        Type: String
+      TableName: !Join ['-', ['testsimpletable1', 'check', !Ref BRANCH]]
             
 
 ###### lambdaLayer ######
