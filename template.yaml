@@ -53,7 +53,9 @@ Resources:
         - S3CrudPolicy:
             BucketName: !Ref ExampleS3
         - DynamoDBCrudPolicy:
-            TableName: !Ref S3CrudPolicy
+            TableName: !Ref ExampleTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ExampleSimpleTable
       Events:
         GetProduct:
           Type: Api 
