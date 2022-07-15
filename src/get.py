@@ -7,4 +7,4 @@ from awsSchema.apigateway import Response, Event
 
 # Cell
 def get(event, *args):
-  return Response.returnSuccess()
+  return Response.returnSuccess(body = {'thisisthegetfunction': 'hellooo'})
