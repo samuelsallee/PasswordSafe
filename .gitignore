@@ -1,4 +1,4 @@
-
+docs/
 # Created by https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
 
 ### Linux ###
@@ -9,6 +9,7 @@
 
 # KDE directory preferences
 .directory
+
 
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
