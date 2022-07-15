@@ -10,18 +10,11 @@ Globals:
     Runtime: python3.8
     Layers:
       - !Ref LambdaLayer
-    VpcConfig:
-      SecurityGroupIds:
-      - sg-73dae500
-      SubnetIds:
-      - subnet-0ca9ad2cd96fccccc
     Environment:
       Variables:
-        DAX_ENDPOINT: 'longtermcluster.vuu7lr.clustercfg.dax.apse1.cache.amazonaws.com:8111'
-        DATABASE_TABLE_NAME: !Join ['-', [ "product-table" , !Ref BRANCH ]]
-        REGION: !Ref REGION
-        BRANCH: !Ref BRANCH
-        SCHEMAURL: ''
+        PASSWORD: '1234'
+        BUCKETNAME: !Join ['-', ['testbucket1', 'check', !Ref BRANCH]]
+        TABLENAME: !Join ['-', ['testtable1', 'check', !Ref BRANCH]]
       
       
 Parameters: 
@@ -32,6 +25,7 @@ Parameters:
   REGION:
     Type: String
     Default: 'ap-southeast-1'
+    
     
     
     
@@ -49,13 +43,16 @@ Resources:
         AllowOrigin: "'*'"
         
   ######## functions ######
-  HelloWorld:
+  TestFunction:
     Type: AWS::Serverless::Function 
     Properties:
-      FunctionName: !Join ['-',[ "helloworld",!Ref BRANCH ]]
-      Handler: app.helloworld
+      FunctionName: !Join ['-',[ "test-function1",!Ref BRANCH ]]
+      Handler: app.testHandler
       Policies:
-        - arn:aws:iam::394922924679:policy/villaDaxPolicy
+        - S3CrudPolicy:
+            BucketName: !Ref ExampleS3
+        - DynamoDBCrudPolicy:
+            TableName: !Ref S3CrudPolicy
       Events:
         GetProduct:
           Type: Api 
@@ -63,6 +60,43 @@ Resources:
             Path: /get
             Method: get
             RestApiId: !Ref Endpoint
+  ##### s3 ########
+  ExampleS3:
+    Type: AWS::S3::Bucket
+    Properties: 
+      AccelerateConfiguration: 
+        AccelerationStatus: Enabled
+      BucketName: !Join ['-', ['testbucket1', 'check', !Ref BRANCH]]
+  ###### dynamodb ########
+  ExampleTable:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - AttributeName: id
+          AttributeType: N
+        - AttributeName: name
+          AttributeType: N
+        - AttributeName: phoneNumber
+          AttributeType: N
+          
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: phoneNumber
+          KeySchema:
+            - AttributeName: phoneNumber
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+      KeySchema: 
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: name
+          KeyType: RANGE
+          
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      TableName: !Join ['-', ['testtable1', 'check', !Ref BRANCH]]
+      
             
 
 ###### lambdaLayer ######

@@ -1,10 +1,10 @@
+ujson==5.3.0
 awsSchema
 requests-aws4auth
 beartype
 dataclasses-jsonschema
 pycognito
 nicHelper
-ujson
 pynamodb-dax
 pydantic
 lambdasdk
