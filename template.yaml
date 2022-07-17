@@ -13,7 +13,7 @@ Globals:
     Environment:
       Variables:
         PASSWORD: '1234'
-        BUCKETNAME: !Join ['-', ['testbucket1', 'check', !Ref BRANCH]]
+        BUCKETNAME: !Join ['-', ['testbucket2', 'check', !Ref BRANCH]]
         TABLENAME: !Join ['-', ['testtable1', 'check', !Ref BRANCH]]
         SIMPLETABLENAME: !Join ['-', ['testsimpletable1', 'check', !Ref BRANCH]]
       
@@ -69,7 +69,7 @@ Resources:
     Properties: 
       AccelerateConfiguration: 
         AccelerationStatus: Enabled
-      BucketName: !Join ['-', ['testbucket1', 'check', !Ref BRANCH]]
+      BucketName: !Join ['-', ['testbucket2', 'check', !Ref BRANCH]]
   ###### dynamodb ########
   ExampleTable:
     Type: AWS::DynamoDB::Table
