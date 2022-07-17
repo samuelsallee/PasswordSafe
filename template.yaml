@@ -12,7 +12,6 @@ Globals:
       - !Ref LambdaLayer
     Environment:
       Variables:
-        PASSWORD: '1234'
         BUCKETNAME: !Join ['-', ['testbucket2', 'check', !Ref BRANCH]]
         TABLENAME: !Join ['-', ['testtable1', 'check', !Ref BRANCH]]
         SIMPLETABLENAME: !Join ['-', ['testsimpletable1', 'check', !Ref BRANCH]]
