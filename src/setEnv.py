@@ -7,3 +7,4 @@ import os
 os.environ['BUCKETNAME'] = 'testbucket2-check-master'
 os.environ['TABLENAME'] = 'testtable1-check-master'
 os.environ['SIMPLETABLENAME'] = 'testsimpletable1-check-master'
+os.environ['AWS_PROFILE'] = 'tenxor'
