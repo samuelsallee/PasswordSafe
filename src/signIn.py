@@ -24,7 +24,8 @@ class H:
   @staticmethod
   def parseInput(event)->User:
     ec = deepcopy(event)
-    user = Event.parseDataClass(User, ec)
+    pathParams = Event.parseQuery(ec)
+    user = User.from_dict(pathParams)
     return user
   @staticmethod
   def checkPassword(user:User)->bool:
