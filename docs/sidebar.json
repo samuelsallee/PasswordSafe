@@ -1,8 +1,10 @@
 {
   "src": {
     "Overview": "/",
-    "get": "get.html",
-    "helloworld": "helloWorld.html",
-    "Table": "table.html"
+    "getEnv": "getEnv.html",
+    "setEnv": "setEnv.html",
+    "passwordHelper": "passwordHelper.html",
+    "Password Table": "passwordTable.html",
+    "Sign up": "signUp.html"
   }
 }

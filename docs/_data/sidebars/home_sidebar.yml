@@ -10,14 +10,20 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: get
-      url: get.html
+      title: getEnv
+      url: getEnv.html
     - output: web,pdf
-      title: helloworld
-      url: helloWorld.html
+      title: setEnv
+      url: setEnv.html
     - output: web,pdf
-      title: Table
-      url: table.html
+      title: passwordHelper
+      url: passwordHelper.html
+    - output: web,pdf
+      title: Password Table
+      url: passwordTable.html
+    - output: web,pdf
+      title: Sign up
+      url: signUp.html
     output: web
     title: src
   output: web

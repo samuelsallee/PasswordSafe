@@ -14,6 +14,7 @@ you can put the IAM user keys in
 1. fill in all the notebooks in the folder nbs
   * put `#export` on top of any cells you want to export and `#default_exp filename` on top of the notebook (see example`get.ipynb`)
   * put `#hide` on top of the cells you dont want to include in python package
+  * change `nbs_path` from `.` to `nbs` in `settings.ini` 
   * run `make build`
 
 2. edit sam template 
@@ -21,6 +22,8 @@ you can put the IAM user keys in
   * test your sam template using `make test`
 
 3. put library to install with pip into `layerRequirements.txt` or `samRequirements.txt`
+
+
 
 4. only for the first run:
   * run `sam build` then `sam deploy --guided`
@@ -32,21 +35,8 @@ you can put the IAM user keys in
   * dont forget to put `#export` on top of the cells you want to include in the product
   
 6. (optional) to deploy using github action, edit the `deploy.yml` file as appropriate
-  `in most cases you should only edit the stack prefix `
-  * edit stack prefix (line 75)
-  
-7. to get github action to work properly, you need to add the required variables including
-  * DOCKER_HUB_ACCESS_TOKEN
-  * DOCKER_HUB_USERNAME
-  * PROD_AWS_ACCESS_KEY_ID
-  * PROD_AWS_SECRET_ACCESS_KEY
+  `in most cases you should only edit the last line`
 
-8. go to [cloudformation](https://ap-southeast-1.console.aws.amazon.com/cloudformation) console to see the result
+7. go to [cloudformation](https://ap-southeast-1.console.aws.amazon.com/cloudformation) console to see the result
 
 
-
-# Known problems
-
-* if you can't build the layer with error such as version number not available, put in previous library version in requirements.txt
-
-* if build error during deployment, you need to manually delete the stack in console or cli `aws cloudformation delete-stack --stack-name <stackname>`

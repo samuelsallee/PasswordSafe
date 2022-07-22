@@ -2,11 +2,22 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"get": "get.ipynb",
-         "helloworld": "helloWorld.ipynb"}
+index = {"USERDATATABLE": "getEnv.ipynb",
+         "USERPASSWORDTABLE": "getEnv.ipynb",
+         "hashPassword": "passwordHelper.ipynb",
+         "checkPassword": "passwordHelper.ipynb",
+         "UserPasswordTable": "passwordTable.ipynb",
+         "User": "signUp.ipynb",
+         "H": "signUp.ipynb",
+         "signIn": "signIn.ipynb",
+         "signUp": "signUp.ipynb"}
 
-modules = ["get.py",
-           "helloworld.py"]
+modules = ["getEnv.py",
+           "setEnv.py",
+           "passwordHelper.py",
+           "passwordTable.py",
+           "signIn.py",
+           "signUp.py"]
 
 doc_url = "https://thanakijwanavit.github.io/src/"
 
