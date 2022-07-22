@@ -1,1 +1,2 @@
-from src.get import get
+from src.signIn import signIn
+from src.signUp import signUp
