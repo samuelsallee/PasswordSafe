@@ -3,7 +3,7 @@ version = 0.1
 [default.deploy]
 [default.deploy.parameters]
 stack_name = "samNbdev"
-s3_bucket = "sam-deployment-tenxor-test1-demo"
+s3_bucket = "test-login-bucket-demo"
 s3_prefix = "samNbdebTemplate"
 region = "ap-southeast-1"
 capabilities = "CAPABILITY_IAM"
