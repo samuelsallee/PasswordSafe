@@ -12,8 +12,8 @@ Globals:
       - !Ref LambdaLayer
     Environment:
       Variables:
-        USERDATATABLE: !Join ['-', ['user', 'data', 'demo', !Ref BRANCH]]
-        USERPASSWORDTABLE: !Join ['-', ['user', 'password', 'demo', !Ref BRANCH]]
+        USERDATATABLE: !Join ['-', ['user', 'data', 'demo1', !Ref BRANCH]]
+        USERPASSWORDTABLE: !Join ['-', ['user', 'password', 'demo1', !Ref BRANCH]]
       
       
 Parameters: 
@@ -24,8 +24,6 @@ Parameters:
   REGION:
     Type: String
     Default: 'ap-southeast-1'
-    
-    
     
     
 Resources:
@@ -45,7 +43,7 @@ Resources:
   SignIn:
     Type: AWS::Serverless::Function 
     Properties:
-      FunctionName: !Join ['-',[ "sign-in-login-demo",!Ref BRANCH ]]
+      FunctionName: !Join ['-',[ "sign-in-login-demo1",!Ref BRANCH ]]
       Handler: app.signIn
       Policies:
         - DynamoDBReadPolicy:
@@ -61,7 +59,7 @@ Resources:
   SignUp:
     Type: AWS::Serverless::Function 
     Properties:
-      FunctionName: !Join ['-',[ "sign-up-login-demo",!Ref BRANCH ]]
+      FunctionName: !Join ['-',[ "sign-up-login-demo1",!Ref BRANCH ]]
       Handler: app.signUp
       Policies:
         - DynamoDBCrudPolicy:
@@ -72,51 +70,6 @@ Resources:
           Properties:
             Path: /signup
             Method: post
-            RestApiId: !Ref Endpoint
-            
-  Validate:
-    Type: AWS::Serverless::Function 
-    Properties:
-      FunctionName: !Join ['-',[ "validate-token-demo",!Ref BRANCH ]]
-      Handler: app.validate
-      Events:
-        GetProduct:
-          Type: Api 
-          Properties:
-            Path: /validate
-            Method: get
-            RestApiId: !Ref Endpoint
-            
-  SaveUserData:
-    Type: AWS::Serverless::Function 
-    Properties:
-      FunctionName: !Join ['-',[ "save-user-data-demo",!Ref BRANCH ]]
-      Handler: app.saveUserData
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref UserDataTable
-      Events:
-        GetProduct:
-          Type: Api 
-          Properties:
-            Path: /saveuserdata
-            Method: post
-            RestApiId: !Ref Endpoint
-            
-  LoadUserData:
-    Type: AWS::Serverless::Function 
-    Properties:
-      FunctionName: !Join ['-',[ "load-user-data-demo",!Ref BRANCH ]]
-      Handler: app.loadUserData
-      Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref UserDataTable
-      Events:
-        GetProduct:
-          Type: Api 
-          Properties:
-            Path: /loaduserdata
-            Method: get
             RestApiId: !Ref Endpoint
             
   ###### dynamodb ########
@@ -137,7 +90,7 @@ Resources:
       KeySchema: 
         - AttributeName: username
           KeyType: HASH
-      TableName: !Join ['-', ['user', 'data', 'demo', !Ref BRANCH]]
+      TableName: !Join ['-', ['user', 'data', 'demo1', !Ref BRANCH]]
       
   #### simpleTable #####
   UserPasswordTable:
@@ -146,7 +99,7 @@ Resources:
       PrimaryKey: 
         Name: username
         Type: String
-      TableName: !Join ['-', ['user', 'password', 'demo', !Ref BRANCH]]
+      TableName: !Join ['-', ['user', 'password', 'demo1', !Ref BRANCH]]
             
 
 ###### lambdaLayer ######
