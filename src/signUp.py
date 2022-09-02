@@ -98,7 +98,9 @@ def signUp(event, *args):
   hashedPw = H.salted_sha256(password)
   logger.info(f'Hashed Pass :: {hashedPw}')
 
-  return Response.returnSuccess("this is sign up function")
+  H.add_user_to_table(username, hashedPw)
+
+  return Response.returnSuccess("Success")
 
 # Cell
 # from beartype import beartype
