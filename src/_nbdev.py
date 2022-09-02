@@ -2,19 +2,19 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"USERDATATABLE": "getEnv.ipynb",
-         "USERPASSWORDTABLE": "getEnv.ipynb",
-         "hashPassword": "passwordHelper.ipynb",
+index = {"hashPassword": "passwordHelper.ipynb",
          "checkPassword": "passwordHelper.ipynb",
-         "UserPasswordTable": "passwordTable.ipynb",
-         "User": "signUp.ipynb",
-         "H": "signUp.ipynb",
          "signIn": "signIn.ipynb",
+         "logger": "signUp.ipynb",
+         "HelperError": "signUp.ipynb",
+         "ParseInputError": "signUp.ipynb",
+         "USERPASSWORDTABLE": "signUp.ipynb",
+         "Thread": "signUp.ipynb",
+         "H": "signUp.ipynb",
+         "EventInput": "signUp.ipynb",
          "signUp": "signUp.ipynb"}
 
-modules = ["getEnv.py",
-           "setEnv.py",
-           "passwordHelper.py",
+modules = ["passwordHelper.py",
            "passwordTable.py",
            "signIn.py",
            "signUp.py"]
