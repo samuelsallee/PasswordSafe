@@ -2,8 +2,8 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "samNbdev"
-s3_bucket = "test-login-bucket-demo"
-s3_prefix = "samNbdebTemplate"
+stack_name = "loginTestDemoSallee"
+s3_bucket = "login-test-demo-sallee"
+s3_prefix = "loginTestDemoSallee"
 region = "ap-southeast-1"
 capabilities = "CAPABILITY_IAM"
