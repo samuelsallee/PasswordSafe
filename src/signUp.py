@@ -35,8 +35,8 @@ class Thread(Model):
         table_name = USERPASSWORDTABLE
         region = 'ap-southeast-1'
 
-    name = UnicodeAttribute(hash_key=True)
-    pHash = UnicodeAttribute(range_key=True)
+    name = UnicodeAttribute(hash_key=True, attr_name='username')
+    pHash = UnicodeAttribute(range_key=True, attr_name='password')
 
 
 # Cell
@@ -87,6 +87,8 @@ class H:
 
 # Cell
 def signUp(event, *args):
+
+  logger.info(f"Password table name :: {USERPASSWORDTABLE}")
 
   evtCpy = deepcopy(event)
   logger.info(f'Event :: {evtCpy}')
