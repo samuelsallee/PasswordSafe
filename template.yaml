@@ -12,8 +12,8 @@ Globals:
       - !Ref LambdaLayer
     Environment:
       Variables:
-        USERDATATABLE: !Join ['-', ['user', 'data', 'demo1', !Ref BRANCH]]
-        USERPASSWORDTABLE: !Join ['-', ['user', 'password', 'demo1', !Ref BRANCH]]
+        USERDATATABLE: !Join ['-', ['user', 'data', 'demo','sallee', !Ref BRANCH]]
+        USERPASSWORDTABLE: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
       
       
 Parameters: 
@@ -40,10 +40,10 @@ Resources:
         AllowOrigin: "'*'"
         
   ######## functions ######
-  SignIn:
+  SignInDemoSallee:
     Type: AWS::Serverless::Function 
     Properties:
-      FunctionName: !Join ['-',[ "sign-in-login-demo1",!Ref BRANCH ]]
+      FunctionName: !Join ['-',[ "sign-in-login-demo-sallee",!Ref BRANCH ]]
       Handler: app.signIn
       Policies:
         - DynamoDBReadPolicy:
@@ -56,10 +56,10 @@ Resources:
             Method: get
             RestApiId: !Ref Endpoint
             
-  SignUp:
+  SignUpDemoSallee:
     Type: AWS::Serverless::Function 
     Properties:
-      FunctionName: !Join ['-',[ "sign-up-login-demo1",!Ref BRANCH ]]
+      FunctionName: !Join ['-',[ "sign-up-login-demo-sallee",!Ref BRANCH ]]
       Handler: app.signUp
       Policies:
         - DynamoDBCrudPolicy:
@@ -68,7 +68,7 @@ Resources:
         GetProduct:
           Type: Api 
           Properties:
-            Path: /signup
+            Path: /signUp
             Method: post
             RestApiId: !Ref Endpoint
             
@@ -80,17 +80,10 @@ Resources:
         - AttributeName: username
           AttributeType: S
       BillingMode: PAY_PER_REQUEST
-#       GlobalSecondaryIndexes:
-#         - IndexName: phoneNumber
-#           KeySchema:
-#             - AttributeName: phoneNumber
-#               KeyType: HASH
-#           Projection:
-#             ProjectionType: ALL
       KeySchema: 
         - AttributeName: username
           KeyType: HASH
-      TableName: !Join ['-', ['user', 'data', 'demo1', !Ref BRANCH]]
+      TableName: !Join ['-', ['user', 'data', 'demo', 'sallee', !Ref BRANCH]]
       
   #### simpleTable #####
   UserPasswordTable:
@@ -99,7 +92,7 @@ Resources:
       PrimaryKey: 
         Name: username
         Type: String
-      TableName: !Join ['-', ['user', 'password', 'demo1', !Ref BRANCH]]
+      TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
             
 
 ###### lambdaLayer ######
