@@ -96,8 +96,9 @@ class H:
 
     @staticmethod
     def usernameAvailable(username):
-        user = Thread.query(username)
-        if len(user) > 0:
+        queryResult = Thread.query(username)
+        listResult = [row for row in queryResult]
+        if len(listResult) > 0:
             return False
         return True
 
