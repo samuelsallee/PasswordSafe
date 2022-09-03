@@ -12,6 +12,9 @@ index = {"hashPassword": "passwordHelper.ipynb",
          "H": "signUp.ipynb",
          "EventInput": "signUp.ipynb",
          "signIn": "signIn.ipynb",
+         "AddUserError": "signUp.ipynb",
+         "CreateTableError": "signUp.ipynb",
+         "UsernameAvailabilityError": "signUp.ipynb",
          "signUp": "signUp.ipynb"}
 
 modules = ["passwordHelper.py",
