@@ -45,9 +45,6 @@ Resources:
     Properties:
       FunctionName: !Join ['-',[ "sign-in-login-demo-sallee",!Ref BRANCH ]]
       Handler: app.signIn
-      Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref UserPasswordTable
       Events:
         GetProduct:
           Type: Api 
@@ -61,9 +58,6 @@ Resources:
     Properties:
       FunctionName: !Join ['-',[ "sign-up-login-demo-sallee",!Ref BRANCH ]]
       Handler: app.signUp
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref UserPasswordTable
       Events:
         GetProduct:
           Type: Api 
@@ -71,29 +65,7 @@ Resources:
             Path: /signUp
             Method: post
             RestApiId: !Ref Endpoint
-            
-  ###### dynamodb ########
-  UserDataTable:
-    Type: AWS::DynamoDB::Table
-    Properties: 
-      AttributeDefinitions: 
-        - AttributeName: username
-          AttributeType: S
-      BillingMode: PAY_PER_REQUEST
-      KeySchema: 
-        - AttributeName: username
-          KeyType: HASH
-      TableName: !Join ['-', ['user', 'data', 'demo', 'sallee', !Ref BRANCH]]
-      
-  #### simpleTable #####
-  UserPasswordTable:
-    Type: AWS::Serverless::SimpleTable
-    Properties:
-      PrimaryKey: 
-        Name: username
-        Type: String
-      TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
-            
+
 
 ###### lambdaLayer ######
 
