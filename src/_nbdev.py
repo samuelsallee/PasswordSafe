@@ -4,7 +4,6 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"hashPassword": "passwordHelper.ipynb",
          "checkPassword": "passwordHelper.ipynb",
-         "signIn": "signIn.ipynb",
          "logger": "signUp.ipynb",
          "HelperError": "signUp.ipynb",
          "ParseInputError": "signUp.ipynb",
@@ -12,6 +11,7 @@ index = {"hashPassword": "passwordHelper.ipynb",
          "Thread": "signUp.ipynb",
          "H": "signUp.ipynb",
          "EventInput": "signUp.ipynb",
+         "signIn": "signIn.ipynb",
          "signUp": "signUp.ipynb"}
 
 modules = ["passwordHelper.py",
