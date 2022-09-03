@@ -97,7 +97,9 @@ class H:
     @staticmethod
     @beartype
     def tableExists() -> bool:
-        return Thread.exists()
+        if Thread.exists():
+            return True
+        return False
 
     @staticmethod
     @beartype
