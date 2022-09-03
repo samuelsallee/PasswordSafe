@@ -52,21 +52,25 @@ class Thread(Model):
 EventInput = dict
 class H:
     @staticmethod
-    def sha256(password):
+    @beartype
+    def sha256(password: str) -> str:
         return hashlib.sha256(password.encode()).hexdigest()
 
     @staticmethod
-    def salt():
+    @beartype
+    def salt() -> str:
         return uuid.uuid4().hex
 
     @classmethod
-    def salted_sha256(cls, password, salt=''):
+    @beartype
+    def salted_sha256(cls, password: str, salt: str ='') -> tuple:
         if salt == '':
             salt = cls.salt()
         return f'{cls.sha256(salt + password)}', f'{salt}'
 
     @staticmethod
-    def add_user_to_table(username, hash, salt, hashAndSalt):
+    @beartype
+    def add_user_to_table(username: str, hash: str, salt: str, hashAndSalt: str):
         try:
             userTable = os.environ['USERPASSWORDTABLE']
             threadItem = Thread(username=deepcopy(username),
@@ -112,7 +116,8 @@ class H:
             raise CreateTableError(f'Unable to create database:\n{e}')
 
     @staticmethod
-    def usernameAvailable(username):
+    @beartype
+    def usernameAvailable(username: str) -> bool:
         try:
             queryResult = Thread.query(username)
             listResult = [row for row in queryResult]
