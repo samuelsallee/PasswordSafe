@@ -92,7 +92,7 @@ class H:
     def createTable():
         '''Cretaes the table if it doesn't exist'''
         if not Thread.exists():
-            Thread.create_table()
+            Thread.create_table(billing_mode='PAY_PER_REQUEST')
 
     @staticmethod
     def usernameAvailable(username):
