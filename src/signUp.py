@@ -35,8 +35,11 @@ class Thread(Model):
         table_name = USERPASSWORDTABLE
         region = 'ap-southeast-1'
 
-    name = UnicodeAttribute(hash_key=True, attr_name='username')
-    pHash = UnicodeAttribute(range_key=True, attr_name='password')
+    username = UnicodeAttribute(hash_key=True, attr_name='username')
+    passwordHash = UnicodeAttribute(range_key=True, attr_name='passwordHash')
+    salt = UnicodeAttribute(attr_name='salt')
+    hashAndSalt = UnicodeAttribute(attr_name='hashAndSalt')
+
 
 
 # Cell
@@ -55,12 +58,12 @@ class H:
     def salted_sha256(cls, password, salt=''):
         if salt == '':
             salt = cls.salt()
-        return f'{cls.sha256(salt + password)}:{salt}' if salt is cls.salted_sha256.__defaults__[0] else cls.sha256(salt + password)
+        return f'{cls.sha256(salt + password)}', f'{salt}'
 
     @staticmethod
-    def add_user_to_table(username, hash):
+    def add_user_to_table(username, hash, salt, hashAndSalt):
         userTable = os.environ['USERPASSWORDTABLE']
-        threadItem = Thread(username, hash)
+        threadItem = Thread(username=username, passwordHash=hash, salt=salt, hashAndSalt=hashAndSalt)
         threadItem.save()
 
 
@@ -85,6 +88,20 @@ class H:
 
         return username, password
 
+    @staticmethod
+    def createTable():
+        '''Cretaes the table if it doesn't exist'''
+        if not Thread.exists():
+            Thread.create_table()
+
+    @staticmethod
+    def usernameAvailable(username):
+        user = Thread.query(username)
+        if len(user) > 0:
+            return False
+        return True
+
+
 # Cell
 def signUp(event, *args):
 
@@ -93,14 +110,18 @@ def signUp(event, *args):
   evtCpy = deepcopy(event)
   logger.info(f'Event :: {evtCpy}')
 
+  H.createTable()
+
   username, password = H.parseInput(evtCpy)
   # Take this away before using, it isn't a good idea to save the username and pw in logs
   logger.info(f"Username :: {username}\npassword :: {password}")
 
-  hashedPw = H.salted_sha256(password)
+  hashedPw, salt = H.salted_sha256(password)
+  hashAndSalt = hashedPw + ':' + salt
   logger.info(f'Hashed Pass :: {hashedPw}')
 
-  H.add_user_to_table(username, hashedPw)
+  if H.usernameAvailable(username):
+    H.add_user_to_table(username, hashedPw, salt, hashAndSalt)
 
   return Response.returnSuccess("Success")
 
