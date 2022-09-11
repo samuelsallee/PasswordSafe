@@ -85,6 +85,7 @@ class H:
             logger.error('newPassword is not in body')
             raise ParseInputError('newPassword is not in body')
 
+
         return username, oldPassword, newPassword
 
     @staticmethod
