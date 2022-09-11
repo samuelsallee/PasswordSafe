@@ -147,6 +147,7 @@ def signUp(event, *args):
   hashedPw, salt = H.salted_sha256(password)
   hashAndSalt = hashedPw + ':' + salt
   logger.info(f'Hashed Pass :: {hashedPw}')
+  logger.info(f'Salt :: {salt}')
 
   if H.usernameAvailable(username):
     H.add_user_to_table(username, hashedPw, salt, hashAndSalt)
