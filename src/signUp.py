@@ -41,7 +41,7 @@ class Thread(Model):
         region = 'ap-southeast-1'
 
     username = UnicodeAttribute(hash_key=True, attr_name='username')
-    passwordHash = UnicodeAttribute(range_key=True, attr_name='passwordHash')
+    passwordHash = UnicodeAttribute(attr_name='passwordHash')
     salt = UnicodeAttribute(attr_name='salt')
     hashAndSalt = UnicodeAttribute(attr_name='hashAndSalt')
 
@@ -81,7 +81,6 @@ class H:
         except Exception as e:
             logger.error(f'Unable to add user to the database:\n{e}')
             raise AddUserError(f'Unable to add user to the database:\n{e}')
-
 
     @staticmethod
     @beartype
