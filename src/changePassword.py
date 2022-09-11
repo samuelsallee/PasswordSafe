@@ -148,13 +148,7 @@ class H:
     @beartype
     def setNewPassword(username: str, hash: str, salt: str, hashAndSalt: str):
         try:
-            #threadItem = Thread(username=deepcopy(username),
-            #                    passwordHash=deepcopy(hash),
-            #                    salt=deepcopy(salt),
-            #                    hashAndSalt=deepcopy(hashAndSalt))
-            #threadItem.save()
-
-            user = Thread.get(username)
+            user = Thread.get(range_key=hash, hash_key=username)
             user.update(actions=[
                 Thread.passwordHash.set(hash),
                 Thread.hashAndSalt.set(hashAndSalt),
