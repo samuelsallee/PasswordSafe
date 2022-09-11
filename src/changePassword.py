@@ -158,6 +158,11 @@ class H:
             logger.error(f'Unable to add user to the database:\n{e}')
             raise NewPasswordError(f'Unable to add user to the database:\n{e}')
 
+    @staticmethod
+    @beartype
+    def salt() -> str:
+        return uuid.uuid4().hex
+
 
 # Cell
 ############################## Main Function ###############################
