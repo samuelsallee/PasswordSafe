@@ -149,10 +149,12 @@ class H:
     def setNewPassword(username: str, hash: str, salt: str, hashAndSalt: str):
         try:
             try:
-                user = Thread.get(range_key=hash, hash_key=username)
+                logger.info(f'username :: {username}')
+                user = Thread.get(username)
             except Exception as e:
                 logger.error(f"Unable to perform get function ::\n{e}")
                 raise Exception(f"Unable to perform get function ::\n{e}")
+
             logger.info(f'user :: {user}')
             user.update(actions=[
                 Thread.passwordHash.set(hash),
