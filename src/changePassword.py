@@ -12,6 +12,7 @@ from beartype import beartype
 from copy import deepcopy
 from pynamodb.models import Model
 from pynamodb.attributes import UnicodeAttribute, NumberAttribute, UnicodeSetAttribute, UTCDateTimeAttribute
+from pynamodb.indexes import GlobalSecondaryIndex, AllProjection
 
 # Cell
 ############### Logger for debugging code ##################
@@ -40,9 +41,10 @@ class Thread(Model):
         region = 'ap-southeast-1'
 
     username = UnicodeAttribute(hash_key=True, attr_name='username')
-    passwordHash = UnicodeAttribute(range_key=True, attr_name='passwordHash')
+    passwordHash = UnicodeAttribute(attr_name='passwordHash')
     salt = UnicodeAttribute(attr_name='salt')
     hashAndSalt = UnicodeAttribute(attr_name='hashAndSalt')
+    username_index = UsernameIndex()
 
 # Cell
 ########## Helper class for main function ##########
