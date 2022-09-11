@@ -148,7 +148,12 @@ class H:
     @beartype
     def setNewPassword(username: str, hash: str, salt: str, hashAndSalt: str):
         try:
-            user = Thread.get(range_key=hash, hash_key=username)
+            try:
+                user = Thread.get(range_key=hash, hash_key=username)
+            except Exception as e:
+                logger.error(f"Unable to perform get function ::\n{e}")
+                raise Exception(f"Unable to perform get function ::\n{e}")
+            logger.info(f'user :: {user}')
             user.update(actions=[
                 Thread.passwordHash.set(hash),
                 Thread.hashAndSalt.set(hashAndSalt),
