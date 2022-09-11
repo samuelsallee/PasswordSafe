@@ -2,26 +2,25 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"hashPassword": "passwordHelper.ipynb",
-         "checkPassword": "passwordHelper.ipynb",
-         "logger": "signUp.ipynb",
+index = {"logger": "signUp.ipynb",
          "HelperError": "signUp.ipynb",
          "ParseInputError": "signUp.ipynb",
          "CheckDatabaseError": "signIn.ipynb",
          "QueryDatabaseError": "signIn.ipynb",
          "GetAttributeError": "signIn.ipynb",
+         "NewPasswordError": "changePassword.ipynb",
          "USERPASSWORDTABLE": "signUp.ipynb",
          "Thread": "signUp.ipynb",
          "H": "signUp.ipynb",
          "EventInput": "signUp.ipynb",
+         "changePassword": "changePassword.ipynb",
          "signIn": "signIn.ipynb",
          "AddUserError": "signUp.ipynb",
          "CreateTableError": "signUp.ipynb",
          "UsernameAvailabilityError": "signUp.ipynb",
          "signUp": "signUp.ipynb"}
 
-modules = ["passwordHelper.py",
-           "passwordTable.py",
+modules = ["changePassword.py",
            "signIn.py",
            "signUp.py"]
 
