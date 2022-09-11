@@ -44,7 +44,7 @@ class Thread(Model):
     passwordHash = UnicodeAttribute(attr_name='passwordHash')
     salt = UnicodeAttribute(attr_name='salt')
     hashAndSalt = UnicodeAttribute(attr_name='hashAndSalt')
-    username_index = UsernameIndex()
+    #username_index = UsernameIndex()
 
 # Cell
 ########## Helper class for main function ##########
