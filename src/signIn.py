@@ -155,9 +155,14 @@ def signIn(event, *args):
 
   if H.usernameInDatabase(username):
     salt = H.getSalt(username)
+    logger.info(f"salt :: {salt}")
     hash = H.getHash(username)
+    logger.info(f'Hash :: {hash}')
     hashedPW, salt = H.salted_sha256(password, salt)
     if hashedPW == hash:
+      logger.info("Signed In Successfully")
       return Response.returnSuccess("Signed In Successfully")
-
+  else:
+    logger.info(f'username not in database')
+  logger.info(f"unable to sign in")
   return Response.returnSuccess("Unable to sign in")
