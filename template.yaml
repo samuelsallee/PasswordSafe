@@ -65,6 +65,19 @@ Resources:
             Path: /signUp
             Method: post
             RestApiId: !Ref Endpoint
+        
+  ChangePasswordDemoSallee:
+    Type: AWS::Serverless::Function 
+    Properties:
+      FunctionName: !Join ['-',[ "change-password-login-demo-sallee",!Ref BRANCH ]]
+      Handler: app.changePassword
+      Events:
+        GetProduct:
+          Type: Api 
+          Properties:
+            Path: /change_password
+            Method: post
+            RestApiId: !Ref Endpoint
 
 
 ###### lambdaLayer ######
