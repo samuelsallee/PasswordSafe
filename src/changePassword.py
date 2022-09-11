@@ -148,12 +148,18 @@ class H:
     @beartype
     def setNewPassword(username: str, hash: str, salt: str, hashAndSalt: str):
         try:
-            userTable = os.environ['USERPASSWORDTABLE']
-            threadItem = Thread(username=deepcopy(username),
-                                passwordHash=deepcopy(hash),
-                                salt=deepcopy(salt),
-                                hashAndSalt=deepcopy(hashAndSalt))
-            threadItem.save()
+            #threadItem = Thread(username=deepcopy(username),
+            #                    passwordHash=deepcopy(hash),
+            #                    salt=deepcopy(salt),
+            #                    hashAndSalt=deepcopy(hashAndSalt))
+            #threadItem.save()
+
+            user = Thread.get(username)
+            user.update(actions=[
+                Thread.passwordHash.set(hash),
+                Thread.hashAndSalt.set(hashAndSalt),
+                Thread.salt.set(salt)
+            ])
         except Exception as e:
             logger.error(f'Unable to add user to the database:\n{e}')
             raise NewPasswordError(f'Unable to add user to the database:\n{e}')
@@ -188,6 +194,7 @@ def changePassword(event, *args):
       newHash, newSalt = H.salted_sha256(newPassword)
       newHashAndSalt = newHash + ':' + newSalt
       logger.info(f'new Hash :: {newHash}')
+      logger.info(f'new Salt :: {newSalt}')
 
       H.setNewPassword(username, newHash, newSalt, newHashAndSalt)
       return Response.returnSuccess("Password Changed Successfully")
