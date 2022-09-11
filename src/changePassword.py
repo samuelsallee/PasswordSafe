@@ -74,12 +74,18 @@ class H:
             raise ParseInputError('username is not in body')
 
         try:
-            password = body['password']
+            oldPassword = body['oldPassword']
         except KeyError:
-            logger.error('password is not in body')
-            raise ParseInputError('password is not in body')
+            logger.error('oldPassword is not in body')
+            raise ParseInputError('oldPassword is not in body')
 
-        return username, password
+        try:
+            newPassword = body['newPassword']
+        except KeyError:
+            logger.error('newPassword is not in body')
+            raise ParseInputError('newPassword is not in body')
+
+        return username, oldPassword, newPassword
 
     @staticmethod
     @beartype
