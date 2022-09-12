@@ -7,7 +7,7 @@ __all__ = ['logger', 'HelperError', 'ParseInputError', 'CheckDatabaseError', 'Qu
 ########################### Imports ###########################
 import hashlib, uuid, os, logging, sys
 import ujson as json
-from Thread import Thread
+from .Thread import Thread
 from awsSchema.apigateway import Event,Response
 from beartype import beartype
 from copy import deepcopy
