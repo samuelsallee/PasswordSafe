@@ -3,7 +3,7 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"USERPASSWORDTABLE": "signUp.ipynb",
-         "Thread": "Thread.ipynb",
+         "Thread": "test.ipynb",
          "logger": "signUp.ipynb",
          "HelperError": "signUp.ipynb",
          "ParseInputError": "signUp.ipynb",
@@ -23,7 +23,8 @@ index = {"USERPASSWORDTABLE": "signUp.ipynb",
 modules = ["Thread.py",
            "changePassword.py",
            "signIn.py",
-           "signUp.py"]
+           "signUp.py",
+           "test.py"]
 
 doc_url = "https://thanakijwanavit.github.io/src/"
 
