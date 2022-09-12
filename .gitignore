@@ -246,3 +246,4 @@ $RECYCLE.BIN/
 .aws-sam/
 **/*.zip
 test/test.ipynb
+src/test.py
