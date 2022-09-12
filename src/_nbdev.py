@@ -3,7 +3,7 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"USERPASSWORDTABLE": "signUp.ipynb",
-         "Thread": "signUp.ipynb",
+         "Thread": "Thread.ipynb",
          "logger": "signUp.ipynb",
          "HelperError": "signUp.ipynb",
          "ParseInputError": "signUp.ipynb",
