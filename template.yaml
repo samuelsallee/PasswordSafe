@@ -50,7 +50,7 @@ Resources:
           Type: Api 
           Properties:
             Path: /signIn
-            Method: get
+            Method: post
             RestApiId: !Ref Endpoint
             
   SignUpDemoSallee:
