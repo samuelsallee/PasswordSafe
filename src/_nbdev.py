@@ -2,7 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"USERPASSWORDTABLE": "signUp.ipynb",
+index = {"USERNUMBERTABLE": "generateRandomNumber.ipynb",
+         "NumberTable": "NumberTable.ipynb",
+         "USERPASSWORDTABLE": "signUp.ipynb",
          "Thread": "test.ipynb",
          "logger": "signUp.ipynb",
          "HelperError": "signUp.ipynb",
@@ -13,15 +15,17 @@ index = {"USERPASSWORDTABLE": "signUp.ipynb",
          "NewPasswordError": "changePassword.ipynb",
          "H": "signUp.ipynb",
          "EventInput": "signUp.ipynb",
-         "changePassword": "changePassword.ipynb",
+         "changePassword": "generateRandomNumber.ipynb",
+         "CreateTableError": "signUp.ipynb",
          "signIn": "signIn.ipynb",
          "AddUserError": "signUp.ipynb",
-         "CreateTableError": "signUp.ipynb",
          "UsernameAvailabilityError": "signUp.ipynb",
          "signUp": "signUp.ipynb"}
 
-modules = ["Thread.py",
+modules = ["NumberTable.py",
+           "Thread.py",
            "changePassword.py",
+           "generateRandomNumber.py",
            "signIn.py",
            "signUp.py",
            "test.py"]
