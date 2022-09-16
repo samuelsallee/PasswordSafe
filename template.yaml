@@ -12,7 +12,7 @@ Globals:
       - !Ref LambdaLayer
     Environment:
       Variables:
-        USERDATATABLE: !Join ['-', ['user', 'data', 'demo','sallee', !Ref BRANCH]]
+        USERNUMBERTABLE: !Join ['-', ['user', 'number', 'table','sallee', !Ref BRANCH]]
         USERPASSWORDTABLE: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
       
       
@@ -76,6 +76,19 @@ Resources:
           Type: Api 
           Properties:
             Path: /change_password
+            Method: post
+            RestApiId: !Ref Endpoint
+
+  GenerateRandomNumberSallee:
+    Type: AWS::Serverless::Function 
+    Properties:
+      FunctionName: !Join ['-',[ "generate-random-number-sallee",!Ref BRANCH ]]
+      Handler: app.generateRandomNumber
+      Events:
+        GetProduct:
+          Type: Api 
+          Properties:
+            Path: /generateRandomNumber
             Method: post
             RestApiId: !Ref Endpoint
 
