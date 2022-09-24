@@ -43,6 +43,9 @@ Resources:
   SignInDemoSallee:
     Type: AWS::Serverless::Function 
     Properties:
+      Policies:
+        DynamoDBReadPolicy:
+          TableName: !Join ['-', ['user', 'number', 'table','sallee', !Ref BRANCH]]
       FunctionName: !Join ['-',[ "sign-in-login-demo-sallee",!Ref BRANCH ]]
       Handler: app.signIn
       Events:
@@ -92,7 +95,16 @@ Resources:
             Method: post
             RestApiId: !Ref Endpoint
 
-
+####### table #########
+  PasswordTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: username
+        Type: String
+      TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
+      Tags: 
+        SamApp: SamApp
 ###### lambdaLayer ######
 
   LambdaLayer:
