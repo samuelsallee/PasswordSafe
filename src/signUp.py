@@ -8,7 +8,7 @@ __all__ = ['logger', 'HelperError', 'ParseInputError', 'AddUserError', 'CreateTa
 import hashlib, uuid, os, logging, sys
 import ujson as json
 from awsSchema.apigateway import Event,Response
-from .Thread import Thread
+from .passwordTable import PasswordTable
 from beartype import beartype
 from copy import deepcopy
 from pynamodb.models import Model
@@ -60,7 +60,7 @@ class H:
     def add_user_to_table(username: str, hash: str, salt: str, hashAndSalt: str):
         try:
             userTable = os.environ['USERPASSWORDTABLE']
-            threadItem = Thread(username=deepcopy(username),
+            threadItem= PasswordTable(username=deepcopy(username),
                                 passwordHash=deepcopy(hash),
                                 salt=deepcopy(salt),
                                 hashAndSalt=deepcopy(hashAndSalt))
@@ -75,7 +75,9 @@ class H:
         '''
         returns username and password arguments from input
         '''
+
         body = Event.parseBody(deepcopy(event))
+        logger.info(f'Event :: {body}')
         try:
             username = body['username']
         except KeyError:
@@ -90,22 +92,12 @@ class H:
 
         return username, password
 
-    @staticmethod
-    def createTable():
-        '''Cretaes the table if it doesn't exist'''
-
-        try:
-            if not Thread.exists():
-                Thread.create_table(billing_mode='PAY_PER_REQUEST')
-        except Exception as e:
-            logger.error(f'Unable to create database:\n{e}')
-            raise CreateTableError(f'Unable to create database:\n{e}')
 
     @staticmethod
     @beartype
     def usernameAvailable(username: str) -> bool:
         try:
-            queryResult = Thread.query(username)
+            queryResult = PasswordTable.query(username)
             listResult = [row for row in queryResult]
             if len(listResult) > 0:
                 return False
@@ -118,24 +110,13 @@ class H:
 # Cell
 ############################## Main Function ###############################
 def signUp(event, *args):
-
-  logger.info(f"Password table name :: {USERPASSWORDTABLE}")
-
-  evtCpy = deepcopy(event)
-  logger.info(f'Event :: {evtCpy}')
-
-  H.createTable()
-
-  username, password = H.parseInput(evtCpy)
-  # Take this away before using, it isn't a good idea to save the username and pw in logs
-  # logger.info(f"Username :: {username}\npassword :: {password}")
-
-  hashedPw, salt = H.salted_sha256(password)
-  hashAndSalt = hashedPw + ':' + salt
-  logger.info(f'Hashed Pass :: {hashedPw}')
-  logger.info(f'Salt :: {salt}')
-
-  if H.usernameAvailable(username):
-    H.add_user_to_table(username, hashedPw, salt, hashAndSalt)
-
-  return Response.returnSuccess("Success")
+    try:
+        username, password = H.parseInput(event)
+        hashedPw, salt = H.salted_sha256(password)
+        hashAndSalt = hashedPw + ':' + salt
+        if not H.usernameAvailable(username):
+          raise UsernameAvailabilityError(f'User alreaady in database')
+        H.add_user_to_table(username, hashedPw, salt, hashAndSalt)
+        return Response.returnSuccess("Success")
+    except Exception as e:
+        return Response.returnError(f'Error :: {e}')
