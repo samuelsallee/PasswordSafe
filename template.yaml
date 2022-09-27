@@ -92,6 +92,38 @@ Resources:
             Method: post
             RestApiId: !Ref Endpoint
 
+######### Tables ########
+  UserPasswordTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
+      AttributeDefinitions:
+        - AttributeName: username
+          AttributeType: S
+        - AttributeName: passwordHash
+          AttributeType: S
+        - AttributeName: salt
+          AttributeType: S
+        - AttributeName: hashAndSalt
+          AttributeType: S
+      KeySchema:
+        - AttributeName: username
+          KeyType: HASH
+  
+  NumberTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      TableName: !Join ['-', ['user', 'number', 'table','sallee', !Ref BRANCH]]
+      AttributeDefinitions:
+        - AttributeName: username
+          AttributeType: S
+        - AttributeName: number
+          AttributeType: N
+      KeySchema:
+        - AttributeName: username
+          KeyType: HASH
 
 ###### lambdaLayer ######
 
