@@ -93,37 +93,23 @@ Resources:
             RestApiId: !Ref Endpoint
 
 ######### Tables ########
-  UserPasswordTable:
-    Type: AWS::DynamoDB::Table
+  PasswordTable:
+    Type: AWS::Serverless::SimpleTable
     Properties:
-      BillingMode: PAY_PER_REQUEST
+      PrimaryKey:
+        Name: username
+        Type: String
       TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
-      AttributeDefinitions:
-        - AttributeName: username
-          AttributeType: S
-        - AttributeName: passwordHash
-          AttributeType: S
-        - AttributeName: salt
-          AttributeType: S
-        - AttributeName: hashAndSalt
-          AttributeType: S
-      KeySchema:
-        - AttributeName: username
-          KeyType: HASH
+      Tags: 
+        SamApp: SamApp
   
-  NumberTable:
-    Type: AWS::DynamoDB::Table
+  PasswordTable:
+    Type: AWS::Serverless::SimpleTable
     Properties:
-      BillingMode: PAY_PER_REQUEST
+      PrimaryKey:
+        Name: username
+        Type: String
       TableName: !Join ['-', ['user', 'number', 'table','sallee', !Ref BRANCH]]
-      AttributeDefinitions:
-        - AttributeName: username
-          AttributeType: S
-        - AttributeName: number
-          AttributeType: N
-      KeySchema:
-        - AttributeName: username
-          KeyType: HASH
 
 ###### lambdaLayer ######
 
