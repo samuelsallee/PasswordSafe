@@ -35,7 +35,7 @@ class IncorrectPasswordError(Exception): pass
 
 # Cell
 ################ Setting Globals from Env Vars ################
-USERPASSWORDTABLE = os.environ['USERPASSWORDTABLE']
+USERPASSWORDTABLE = os.environ.get('USERPASSWORDTABLE', 'user-password-demo-sallee-master')
 
 # Cell
 ########## Helper class for main function ##########

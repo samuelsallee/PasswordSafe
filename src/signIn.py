@@ -33,7 +33,7 @@ class WrongHashError(Exception): pass
 
 # Cell
 ################ Setting Globals from Env Vars ################
-USERPASSWORDTABLE = os.environ['USERPASSWORDTABLE']
+USERPASSWORDTABLE = os.environ.get('USERPASSWORDTABLE', 'user-password-demo-sallee-master')
 
 # Cell
 ########## Helper class for main function ##########
@@ -60,7 +60,7 @@ class H:
         body = Event.parseBody(deepcopy(event))
         logger.info(f'Event :: {event}')
         try:
-            username = body['username']
+            username = body.get('username')
         except KeyError:
             logger.error('username is not in body')
             raise ParseInputError('username is not in body')

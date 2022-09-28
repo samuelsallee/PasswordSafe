@@ -28,12 +28,14 @@ class APIError(Exception): pass
 
 # Cell
 ################ Setting Globals from Env Vars ################
-USERNUMBERTABLE = os.environ['USERNUMBERTABLE']
+USERNUMBERTABLE = os.environ.get('USERNUMBERTABLE', 'user-number-table-sallee-master')
 
 # Cell
 ########## Helper class for main function ##########
 EventInput = dict
 class H:
+
+    randNumUrl = 'https://www.random.org/integers/?num=1&min=0&max=1000&col=1&base=10&format=plain&rnd=new'
 
     @staticmethod
     @beartype
@@ -90,8 +92,7 @@ def generateRandomNumber(event, *args):
             output = {'success': True, 'age' : 'old', 'number' : int(userNumber)}
             return Response.returnSuccess(body=output)
 
-        URL = 'https://www.random.org/integers/?num=1&min=0&max=10&col=1&base=10&format=plain&rnd=new'
-        resp = requests.get(url=URL)
+        resp = requests.get(url=H.randNumUrl)
         if resp.status_code > 399:
             raise APIError(f"{resp.status_code} : {resp.content}")
         threadItem = NumberTable(username=deepcopy(username), number=json.loads(resp.content))

@@ -9,7 +9,7 @@ from pynamodb.attributes import UnicodeAttribute, NumberAttribute
 
 # Cell
 ################ Setting Globals from Env Vars ################
-USERNUMBERTABLE = os.environ['USERNUMBERTABLE']
+USERNUMBERTABLE = os.environ.get('USERNUMBERTABLE', 'user-password-demo-sallee-master')
 
 # Cell
 ############## Class for accessing DynamoDB #################

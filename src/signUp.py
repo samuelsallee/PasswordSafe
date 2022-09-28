@@ -32,7 +32,7 @@ class UsernameAvailabilityError(HelperError): pass
 
 # Cell
 ################ Setting Globals from Env Vars ################
-USERPASSWORDTABLE = os.environ['USERPASSWORDTABLE']
+USERPASSWORDTABLE = os.environ.get('USERPASSWORDTABLE', 'user-password-demo-sallee-master')
 
 # Cell
 ########## Helper class for main function ##########
@@ -59,7 +59,7 @@ class H:
     @beartype
     def add_user_to_table(username: str, hash: str, salt: str, hashAndSalt: str):
         try:
-            userTable = os.environ['USERPASSWORDTABLE']
+
             threadItem= PasswordTable(username=deepcopy(username),
                                 passwordHash=deepcopy(hash),
                                 salt=deepcopy(salt),
