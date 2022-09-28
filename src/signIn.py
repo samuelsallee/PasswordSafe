@@ -82,6 +82,9 @@ class H:
             if len(listResult) != 1:
                 logger.error(f'Username not in table')
                 raise UsernameInTableError(f'Username not in table')
+                return False
+            return True
+
         except Exception as e:
             logger.error(f'Unable to check whether or not the username is in the database:\n{e}')
             raise CheckDatabaseError(f'Unable to check whether or not the username is in the database:\n{e}')
