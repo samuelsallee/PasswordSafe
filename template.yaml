@@ -52,7 +52,8 @@ Resources:
             Path: /signIn
             Method: post
             RestApiId: !Ref Endpoint
-      DynamoDBReadPolicy:
+      Policies:
+        DynamoDBReadPolicy:
           TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
             
   SignUpDemoSallee:
@@ -67,7 +68,8 @@ Resources:
             Path: /signUp
             Method: post
             RestApiId: !Ref Endpoint
-      DynamoDBCrudPolicy:
+      Policies:
+        DynamoDBCrudPolicy:
           TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
         
   ChangePasswordDemoSallee:
@@ -82,7 +84,8 @@ Resources:
             Path: /change_password
             Method: post
             RestApiId: !Ref Endpoint
-      DynamoDBCrudPolicy:
+      Policies:
+        DynamoDBCrudPolicy:
           TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
 
   GenerateRandomNumberSallee:
@@ -97,7 +100,8 @@ Resources:
             Path: /generateRandomNumber
             Method: post
             RestApiId: !Ref Endpoint
-      DynamoDBCrudPolicy:
+      Policies:
+        DynamoDBCrudPolicy:
           TableName: !Join ['-', ['user', 'number', 'table','sallee', !Ref BRANCH]]
 
 ######### Tables ########
