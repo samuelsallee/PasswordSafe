@@ -52,6 +52,8 @@ Resources:
             Path: /signIn
             Method: post
             RestApiId: !Ref Endpoint
+      DynamoDBReadPolicy:
+          TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
             
   SignUpDemoSallee:
     Type: AWS::Serverless::Function 
@@ -65,6 +67,8 @@ Resources:
             Path: /signUp
             Method: post
             RestApiId: !Ref Endpoint
+      DynamoDBCrudPolicy:
+          TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
         
   ChangePasswordDemoSallee:
     Type: AWS::Serverless::Function 
@@ -78,6 +82,8 @@ Resources:
             Path: /change_password
             Method: post
             RestApiId: !Ref Endpoint
+      DynamoDBCrudPolicy:
+          TableName: !Join ['-', ['user', 'password', 'demo', 'sallee', !Ref BRANCH]]
 
   GenerateRandomNumberSallee:
     Type: AWS::Serverless::Function 
@@ -91,6 +97,8 @@ Resources:
             Path: /generateRandomNumber
             Method: post
             RestApiId: !Ref Endpoint
+      DynamoDBCrudPolicy:
+          TableName: !Join ['-', ['user', 'number', 'table','sallee', !Ref BRANCH]]
 
 ######### Tables ########
   PasswordTable:
@@ -103,7 +111,7 @@ Resources:
       Tags: 
         SamApp: SamApp
   
-  PasswordTable:
+  NumberTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
       PrimaryKey:
